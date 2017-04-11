@@ -49,12 +49,12 @@ describe('World', () => {
 
   describe('instance', () => {
     it('should be able to randomnize the values in its layout', () => {
-      let world = new World(5, 5);
+      let world = new World(50, 50);
 
       world.init();
 
       for (let row of world.layout) {
-        assert.ok(5, row.length);
+        assert.ok(50, row.length);
         assert.ok(row.some((element, index, array) => {
           return element.getStatus() === 1;
         }));

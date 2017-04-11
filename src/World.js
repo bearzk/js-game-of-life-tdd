@@ -22,7 +22,7 @@ class World {
   init () {
     for (let row of this.layout) {
       for (let cell of row) {
-        cell.setStatus(Math.random() > 0.5 ? 1 : 0);
+        cell._setStatus(Math.random() > 0.5 ? 1 : 0);
       }
     }
   }

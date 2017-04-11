@@ -21,9 +21,19 @@ describe('Cell', () => {
   })
 
   describe('instance', () => {
+    it('should be able to get X', () => {
+      let cell = new Cell(0,1,3);
+      assert(1, cell.getX());
+    })
+    it('should be able to get Y', () => {
+      let cell = new Cell(0,1,3);
+      assert(3, cell.getY());
+    })
+  })
+
+  describe('instance', () => {
     it('should be able to set value', () => {
-      let cell = new Cell();
-      cell.setStatus(1);
+      let cell = new Cell(1);
       assert.equal(1, cell.getStatus());
     })
   })
@@ -33,16 +43,19 @@ describe('Cell', () => {
       let cell = new Cell(1);
       cell.evolve([0,0,0,1,0,0,0,0]);
       assert.equal(0, cell.getStatus());
+      assert.equal(1, cell.getPrev());
     })
 
     it('should live when it has exactly 2 or 3 neighbours', () => {
       let cell = new Cell(1);
       cell.evolve([0,0,1,1,0,0,0,0]);
       assert.equal(1, cell.getStatus());
+      assert.equal(1, cell.getPrev());
 
       cell = new Cell(1);
       cell.evolve([0,0,1,1,0,0,1,0]);
       assert.equal(1, cell.getStatus());
+      assert.equal(1, cell.getPrev());
     })
   })
 
@@ -51,6 +64,7 @@ describe('Cell', () => {
       let cell = new Cell();
       cell.evolve([0,1,1,1,0,0,0,0]);
       assert.equal(1, cell.getStatus());
+      assert.equal(0, cell.getPrev());
     })
   })
 })

@@ -1,6 +1,7 @@
 let assert = require('assert');
 
-const World = require('../src/World')
+const World = require('../src/World');
+const Cell = require('../src/Cell');
 
 describe('World', () => {
 
@@ -13,8 +14,7 @@ describe('World', () => {
 
   describe('instance', () => {
     it('should be able to init a rectangle layout', () => {
-      let world = new World();
-      world.init(0, 0);
+      let world = new World(0, 0);
       assert.deepEqual([[]], world.layout);
     });
   });
@@ -22,32 +22,44 @@ describe('World', () => {
   describe('instance', () => {
     it('should be able to init a rectangle layout without init params 5*5', () => {
       let world = new World();
-      world.init();
-      assert.deepEqual(
-        [
-          [0,0,0,0,0],
-          [0,0,0,0,0],
-          [0,0,0,0,0],
-          [0,0,0,0,0],
-          [0,0,0,0,0]
-        ],
-        world.layout
-      );
+      assert.equal(5, world.layout.length);
+      for (let row of world.layout) {
+        assert.equal(5, row.length);
+        for (let cell of row) {
+          assert.ok(cell instanceof Cell);
+          assert.equal(0, cell.getStatus());
+        }
+      }
     })
   })
 
   describe('instance', () => {
     it('should be able to init a rectangle layout without init params 3*3', () => {
-      let world = new World();
-      world.init(3, 3);
-      assert.deepEqual(
-        [
-          [0,0,0],
-          [0,0,0],
-          [0,0,0]
-        ],
-        world.layout
-      );
+      let world = new World(3, 3);
+      assert.equal(3, world.layout.length);
+      for (let row of world.layout) {
+        assert.equal(3, row.length);
+        for (let cell of row) {
+          assert.ok(cell instanceof Cell);
+          assert.equal(0, cell.getStatus());
+        }
+      }
+    })
+  })
+
+  describe('instance', () => {
+    it('should be able to randomnize the values in its layout', () => {
+      let world = new World(5, 5);
+
+      world.init();
+
+      for (let row of world.layout) {
+        assert.ok(5, row.length);
+        assert.ok(row.some((element, index, array) => {
+          return element.getStatus() === 1;
+        }));
+      }
+
     })
   })
 });

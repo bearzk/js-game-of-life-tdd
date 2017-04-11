@@ -1,6 +1,14 @@
+'use strict';
+
 class Cell {
-  constructor () {
-    this.status = 0;
+  constructor (status = 0) {
+    this.setStatus(status);
+  }
+
+  __countLive (statuses) {
+    return statuses.reduce((acc, val) => {
+      return acc + val;
+    }, 0);
   }
 
   getStatus () {
@@ -12,7 +20,27 @@ class Cell {
   }
 
   evolve (statuses) {
-    return 0;
+    let liveNeighbours = this.__countLive(statuses);
+
+    if (!this.getStatus() && liveNeighbours == 3) {
+      this.setStatus(1);
+      return;
+    }
+
+    if (liveNeighbours < 2) {
+      this.setStatus(0);
+      return;
+    }
+
+    if (liveNeighbours == 2 || liveNeighbours == 3) {
+      this.setStatus(1);
+      return;
+    }
+
+    if (liveNeighbours > 3) {
+      this.setStatus(0);
+      return;
+    }
   }
 }
 

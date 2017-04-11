@@ -3,7 +3,7 @@
 const Cell = require('./Cell');
 
 class World {
-  constructor(x = 5, y = 5) {
+  constructor (x = 5, y = 5) {
     if (x === 0 && y ===0 ) {
       this.layout = [[]]
       return

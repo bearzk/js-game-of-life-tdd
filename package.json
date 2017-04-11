@@ -1,6 +1,25 @@
 {
-  "dependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
-  }
+  "name": "js-game-of-life-tdd",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha tests/**/*.js --recursieve --reporter nyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/bearzk/js-game-of-life-tdd.git"
+  },
+  "keywords": [
+    "gol",
+    "tdd"
+  ],
+  "author": "bearzk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/bearzk/js-game-of-life-tdd/issues"
+  },
+  "homepage": "https://gitlab.com/bearzk/js-game-of-life-tdd#README"
 }

@@ -17,7 +17,7 @@ class World {
     for (var i = 0; i < x; i++) {
       let row = [];
       for (var j = 0; j < y; j++) {
-        row.push(new Cell());
+        row.push(new Cell(0, i, j));
       }
       this.layout.push(row);
     }
@@ -35,6 +35,15 @@ class World {
     return this;
   }
 
+  evolve () {
+    this._prepare();
+    for (let row of this.layout) {
+      for (let cell of row) {
+        cell.evolve()
+      }
+    }
+  }
+
   checkNeighbours (coordinate) {
     let res = [];
     let indices = this.__getNeighboursIndices(coordinate);
@@ -42,6 +51,19 @@ class World {
       res.push(this.layout[index.x][index.y].getStatus());
     }
     return res;
+  }
+
+  _prepare () {
+    for (let row of this.layout) {
+      for (let cell of row) {
+        cell.prepare(
+          this.checkNeighbours({
+              x: cell.getX(),
+              y: cell.getY()
+            })
+        );
+      }
+    }
   }
 
   __getNeighboursIndices (coordinate) {

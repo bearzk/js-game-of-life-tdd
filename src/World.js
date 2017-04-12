@@ -4,7 +4,7 @@ const Cell = require('./Cell');
 
 class World {
 
-  constructor (x = 5, y = 5, speed = 'normal') {
+  constructor (y = 5, x = 5, speed = 'normal') {
     if (x === 0 && y ===0 ) {
       this.layout = [[]];
       this.xMax = 0;

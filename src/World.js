@@ -3,20 +3,27 @@
 const Cell = require('./Cell');
 
 class World {
-  constructor (x = 5, y = 5) {
+
+  constructor (x = 5, y = 5, speed = 'normal') {
     if (x === 0 && y ===0 ) {
-      this.layout = [[]]
-      return
+      this.layout = [[]];
+      this.xMax = 0;
+      this.yMax = 0;
+      this.speed = speed;
+      return;
     }
 
-    this.layout = []
+    this.layout = [];
     for (var i = 0; i < x; i++) {
-      let row = []
+      let row = [];
       for (var j = 0; j < y; j++) {
         row.push(new Cell());
       }
-      this.layout.push(row)
+      this.layout.push(row);
     }
+
+    this.xMax = x - 1;
+    this.yMax = y - 1;
   }
 
   init () {
@@ -25,7 +32,64 @@ class World {
         cell._setStatus(Math.random() > 0.5 ? 1 : 0);
       }
     }
+    return this;
   }
+
+  checkNeighbours (coordinate) {
+    let res = [];
+    let indices = this.__getNeighboursIndices(coordinate);
+    for (let index of indices) {
+      res.push(this.layout[index.x][index.y].getStatus());
+    }
+    return res;
+  }
+
+  __getNeighboursIndices (coordinate) {
+    let indices = [];
+
+    if (coordinate.x < 0 || coordinate.x > this.xMax) {
+      return indices;
+    }
+
+    if (coordinate.y < 0 || coordinate.y > this.yMax) {
+      return indices;
+    }
+
+    if (coordinate.x - 1 >= 0) {
+      if (coordinate.y - 1 >= 0) {
+        indices.push({x: coordinate.x - 1, y: coordinate.y - 1 });
+      }
+
+      if (coordinate.y + 1 <= this.yMax) {
+        indices.push({x: coordinate.x - 1, y: coordinate.y + 1});
+      }
+
+      indices.push({x: coordinate.x - 1, y: coordinate.y});
+    }
+
+    if (coordinate.x + 1 <= this.xMax) {
+      if (coordinate.y - 1 >= 0) {
+        indices.push({x: coordinate.x + 1, y: coordinate.y - 1});
+      }
+
+      if (coordinate.y + 1 <= this.yMax) {
+        indices.push({x: coordinate.x + 1, y: coordinate.y + 1});
+      }
+
+      indices.push({x: coordinate.x + 1, y: coordinate.y});
+    }
+
+    if (coordinate.y - 1 >= 0) {
+      indices.push({x: coordinate.x, y: coordinate.y - 1});
+    }
+
+    if (coordinate.y + 1 <= this.yMax) {
+      indices.push({x: coordinate.x, y: coordinate.y + 1});
+    }
+
+    return indices;
+  }
+
 };
 
 module.exports = World;

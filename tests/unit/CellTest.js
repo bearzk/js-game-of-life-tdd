@@ -2,7 +2,7 @@
 
 let assert = require('assert');
 
-const Cell = require('../src/Cell');
+const Cell = require('../../src/Cell');
 
 describe('Cell', () => {
 

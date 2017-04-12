@@ -69,8 +69,6 @@ describe('World', () => {
 
       world.init();
 
-      console.log(world.checkNeighbours({x: 1, y: 1}))
-
       assert.equal(3, world.checkNeighbours({x: 0, y: 0}).length);
       assert.equal(5, world.checkNeighbours({x: 0, y: 1}).length);
       assert.equal(3, world.checkNeighbours({x: 0, y: 2}).length);

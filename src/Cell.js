@@ -65,32 +65,31 @@ class Cell {
     this._setNext(1);
   }
 
-  _evolve (statuses) {
+  prepare (statuses) {
     let liveNeighbours = this.__countLive(statuses);
 
     if (!this.getStatus() && liveNeighbours == 3) {
       this._willLive();
-      return;
+      return this;
     }
 
     if (liveNeighbours < 2) {
       this._willDie();
-      return;
+      return this;
     }
 
     if (liveNeighbours == 2 || liveNeighbours == 3) {
       this._willLive();
-      return;
+      return this;
     }
 
     if (liveNeighbours > 3) {
       this._willDie();
-      return;
+      return this;
     }
   }
 
-  evolve (statuses) {
-    this._evolve(statuses);
+  evolve () {
     this._setPrev(this.getStatus());
     this._setStatus(this.getNext());
   }

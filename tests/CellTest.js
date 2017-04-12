@@ -41,19 +41,19 @@ describe('Cell', () => {
   describe('live cell', () => {
     it('should die when it has less than 2 live neighbours', () => {
       let cell = new Cell(1);
-      cell.evolve([0,0,0,1,0,0,0,0]);
+      cell.prepare([0,0,0,1,0,0,0,0]).evolve();
       assert.equal(0, cell.getStatus());
       assert.equal(1, cell.getPrev());
     })
 
     it('should live when it has exactly 2 or 3 neighbours', () => {
       let cell = new Cell(1);
-      cell.evolve([0,0,1,1,0,0,0,0]);
+      cell.prepare([0,0,1,1,0,0,0,0]).evolve();
       assert.equal(1, cell.getStatus());
       assert.equal(1, cell.getPrev());
 
       cell = new Cell(1);
-      cell.evolve([0,0,1,1,0,0,1,0]);
+      cell.prepare([0,0,1,1,0,0,1,0]).evolve();
       assert.equal(1, cell.getStatus());
       assert.equal(1, cell.getPrev());
     })
@@ -62,7 +62,7 @@ describe('Cell', () => {
   describe('dead cell', () => {
     it('should become live when it has exactly 3 live neighbours', () => {
       let cell = new Cell();
-      cell.evolve([0,1,1,1,0,0,0,0]);
+      cell.prepare([0,1,1,1,0,0,0,0]).evolve();
       assert.equal(1, cell.getStatus());
       assert.equal(0, cell.getPrev());
     })

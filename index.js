@@ -10,7 +10,7 @@ let draw = (world) => {
   for (let row of world.layout) {
     let rowVals = [];
     for (let cell of row) {
-      rowVals.push(cell.getStatus());
+      rowVals.push(cell.getStatus() ? '0' : '.');
     }
     process.stdout.write(rowVals.join(' ') + '\n');
   }

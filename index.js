@@ -16,6 +16,7 @@ let draw = (world) => {
   }
 }
 
+
 while (1) {
   draw(world);
   sleep.msleep(300);

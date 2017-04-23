@@ -73,18 +73,13 @@ class Cell {
       return this;
     }
 
-    if (liveNeighbours < 2) {
+    if (liveNeighbours < 2 || liveNeighbours > 3) {
       this._willDie();
       return this;
     }
 
     if (liveNeighbours == 2 || liveNeighbours == 3) {
       this._willLive();
-      return this;
-    }
-
-    if (liveNeighbours > 3) {
-      this._willDie();
       return this;
     }
   }

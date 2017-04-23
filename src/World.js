@@ -17,7 +17,7 @@ class World {
     for (var i = 0; i < x; i++) {
       let row = [];
       for (var j = 0; j < y; j++) {
-        row.push(new Cell(0, i, j));
+        row.push(this.__createCell(i, j));
       }
       this.layout.push(row);
     }
@@ -64,6 +64,10 @@ class World {
         );
       }
     }
+  }
+
+  __createCell (x, y) {
+    return new Cell(0, x, y)
   }
 
   __getNeighboursIndices (coordinate) {

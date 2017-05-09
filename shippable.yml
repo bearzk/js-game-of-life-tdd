@@ -5,8 +5,11 @@ node_js:
 
 build:
   ci:
+    - mkdir -p $SHIPPABLE_BUILD_DIR/coverage
     - npm install
     - npm test
+
+    - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha tests/unit --dir $SHIPPABLE_BUILD_DIR/coverage
 
   cache: true
 
